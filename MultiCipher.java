@@ -1,7 +1,6 @@
 // Natan Tadesse
 // 10/9/2024
-// TA: Esha Kunisetty
-// P0: Ciphers
+// Ciphers
 /* This class represents a multi-cipher that applies multiple ciphers sequentially.
    It extends the Cipher class and provides methods to encrypt and decrypt strings
    using the list of provided ciphers. */
