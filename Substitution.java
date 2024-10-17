@@ -1,7 +1,6 @@
 // Natan Tadesse
 // 10/9/2024
-// TA: Esha Kunisetty
-// P0: Ciphers
+// Ciphers
 /* This class represents a substitution cipher. It allows for setting a shifter string
    and provides methods to encrypt and decrypt strings using the substitution cipher. */
 import java.util.*;
