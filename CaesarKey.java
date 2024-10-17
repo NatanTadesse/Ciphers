@@ -1,7 +1,6 @@
 // Natan Tadesse
 // 10/9/2024
-// TA: Esha Kunisetty
-// P0: Ciphers
+// Ciphers
 /* This class represents a Caesar cipher with a key. It extends the Substitution class
    and provides a constructor to initialize the shifter string based on the provided key. */
 import java.util.*;
