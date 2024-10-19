@@ -8,9 +8,7 @@ public class Testing {
     @Test
     @DisplayName("EXAMPLE TEST CASE - 'A'-'G' Spec Example")
     public void subAGTest() {
-        // Remember that you can change MIN_CHAR AND MAX_CHAR 
-        // in Cipher.java to make testing easier! For this 
-        // example test, we are using MIN_CHAR = A and MAX_CHAR = G
+
 
         // Skip this test if the constants have changed
         assumeTrue(Cipher.MIN_CHAR == (int)('A') && Cipher.MAX_CHAR == (int)('G'));
@@ -19,9 +17,6 @@ public class Testing {
         assertEquals("FGE", testSubstitution.encrypt("FAD"));
         assertEquals("BAD", testSubstitution.decrypt("CGE"));
         
-        // Per the spec, we should throw an IllegalArgumentException if 
-        // the length of the shifter doesn't match the number of characters
-        // within our Cipher's encodable range
         assertThrows(IllegalArgumentException.class, () -> {
             new Substitution("GCB");
         });
@@ -64,9 +59,6 @@ public class Testing {
         // Skip this test if the constants have changed
         assumeTrue(Cipher.MIN_CHAR == (int)('A') && Cipher.MAX_CHAR == (int)('Z'));
 
-        // TODO: Create a new CaesarKey("TIN"), encrypt the message "HELLO" and check the
-        //       result's accurate. Then, take the encrypted message, decrypt it, and
-        //       check the result's accurate
         Cipher testCaesarKey = new CaesarKey("TIN");
         String encrypted = testCaesarKey.encrypt("HELLO");
         
@@ -82,10 +74,6 @@ public class Testing {
     public void shiftAZOne() {
         // Skip this test if the constants have changed
         assumeTrue(Cipher.MIN_CHAR == (int)('A') && Cipher.MAX_CHAR == (int)('Z'));
-
-        // TODO: Create a new CaesarShift(6), encrypt the message "HELLO" and check the
-        //       result's accurate. Then, take the encrypted message, decrypt it, and
-        //       check the result's accurate
 
         Cipher testCaesarShift = new CaesarShift(6);
         String encrypted = testCaesarShift.encrypt("HELLO");
@@ -103,9 +91,6 @@ public class Testing {
         // Skip this test if the constants have changed
         assumeTrue(Cipher.MIN_CHAR == (int)('A') && Cipher.MAX_CHAR == (int)('Z'));
 
-        // TODO: Create a new MultiCipher with ciphers CaesarKey("TIN") and CaesarShift(6)),
-        //       encrypt the message "HELLO", and check the result's accurate. Then, take
-        //       the encrypted message, decrypt it, and check the result's accurate
         Cipher testMultiCipher = new MultiCipher(Arrays.asList(new CaesarKey("TIN"), new CaesarShift(6)));
 
         String encrypted = testMultiCipher.encrypt("HELLO");
