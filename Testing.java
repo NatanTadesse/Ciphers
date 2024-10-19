@@ -9,7 +9,6 @@ public class Testing {
     @DisplayName("EXAMPLE TEST CASE - 'A'-'G' Spec Example")
     public void subAGTest() {
 
-
         // Skip this test if the constants have changed
         assumeTrue(Cipher.MIN_CHAR == (int)('A') && Cipher.MAX_CHAR == (int)('G'));
 
