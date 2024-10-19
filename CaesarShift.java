@@ -17,20 +17,15 @@ public class CaesarShift extends Substitution {
             throw new IllegalArgumentException("Shift must be greater than 0!");
         }
 
-        Queue<Character> queue = new LinkedList<>();
+        List<Character> list = new ArrayList<>();
         for (int i = MIN_CHAR; i <= MAX_CHAR; i++) {
-            queue.add((char) i);
-        }
-
-        for (int i = 0; i < shift; i++) {
-            char c = queue.poll();
-            queue.add(c);
+            list.add((char) i);
         }
 
         String shifter = "";
-        
-        for (char c : queue) {
-            shifter += c;
+        int totalChars = list.size();
+        for (int i = 0; i < totalChars; i++) {
+            shifter += list.get((i + shift) % totalChars);
         }
 
         setShifter(shifter);
