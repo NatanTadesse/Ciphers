@@ -6,7 +6,7 @@
 import java.util.*;
 
 public class Substitution extends Cipher {
-   private ArrayList<Character> shifter;
+   private String shifter;
 
    // Constructor that initializes the shifter to null
    public Substitution() {
@@ -16,34 +16,42 @@ public class Substitution extends Cipher {
    // Constructor that initializes the shifter with the provided string
    // Parameters:
    //   - shifter: String representing the shifter to be used for the substitution cipher
+   // Exceptions:
+   //   - Throws an IllegalArgumentException if the shifter length does not match the total number
+   //     of encodable characters
+   //   - Throws an IllegalArgumentException if the shifter contains characters outside the
+   //     encodable range
+   //   - Throws an IllegalArgumentException if the shifter contains duplicate characters
    public Substitution(String shifter) {
        setShifter(shifter);
    }
-   
+
    // Sets the shifter string for the substitution cipher
    // Parameters:
    //   - shifter: String representing the shifter to be used for the substitution cipher
    // Exceptions:
-   //   - Throws an IllegalArgumentException if the shifter length does not match the total number of encodable characters
-   //   - Throws an IllegalArgumentException if the shifter contains characters outside the encodable range
+   //   - Throws an IllegalArgumentException if the shifter length does not match the total number
+   //     of encodable characters
+   //   - Throws an IllegalArgumentException if the shifter contains characters outside the
+   //     encodable range
    //   - Throws an IllegalArgumentException if the shifter contains duplicate characters
    public void setShifter(String shifter) {
        if (shifter.length() != TOTAL_CHARS) {
-           throw new IllegalArgumentException("Shifter length must match the total number of encodable characters.");
+           throw new IllegalArgumentException("Shifter length must match the total number of " +
+                                              "encodable characters.");
        }
        Set<Character> charSet = new HashSet<>();
-       ArrayList<Character> shifterList = new ArrayList<>();
        for (int i = 0; i < shifter.length(); i++) {
            char c = shifter.charAt(i);
            if (c < MIN_CHAR || c > MAX_CHAR) {
-               throw new IllegalArgumentException("Shifter contains characters outside the encodable range.");
+               throw new IllegalArgumentException("Shifter contains characters outside the " +
+                                                  "encodable range.");
            }
            if (!charSet.add(c)) {
                throw new IllegalArgumentException("Shifter contains duplicate characters.");
            }
-           shifterList.add(c);
        }
-       this.shifter = shifterList;
+       this.shifter = shifter;
    }
 
    // Encrypts the input string using the substitution cipher
@@ -53,6 +61,7 @@ public class Substitution extends Cipher {
    //   - String representing the encrypted result
    // Exceptions:
    //   - Throws an IllegalStateException if the shifter has not been set
+   //   - Input string should be non-null and all characters should be within the encodable range
    @Override
    public String encrypt(String input) {
        if (shifter == null) {
@@ -62,7 +71,7 @@ public class Substitution extends Cipher {
        for (int i = 0; i < input.length(); i++) {
            char c = input.charAt(i);
            int index = c - MIN_CHAR;
-           encrypted += shifter.get(index);
+           encrypted += shifter.charAt(index);
        }
        return encrypted;
    }
@@ -74,6 +83,7 @@ public class Substitution extends Cipher {
    //   - String representing the decrypted result
    // Exceptions:
    //   - Throws an IllegalStateException if the shifter has not been set
+   //   - Input string should be non-null and all characters should be within the encodable range
    @Override
    public String decrypt(String input) {
        if (shifter == null) {
