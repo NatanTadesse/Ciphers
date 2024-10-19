@@ -13,7 +13,7 @@ public class MultiCipher extends Cipher {
     // Parameters:
     //   - ciphers: List<Cipher> representing the list of ciphers to be used
     // Exceptions:
-    //   - Throws an IllegalArgumentException if the cipher list is null
+    //   - Throws IllegalArgumentException if the cipher list is null
     public MultiCipher(List<Cipher> ciphers) {
         if (ciphers == null) {
             throw new IllegalArgumentException("Cipher list cannot be null!");
@@ -26,8 +26,14 @@ public class MultiCipher extends Cipher {
     //   - input: String representing the input to be encrypted
     // Returns:
     //   - String representing the encrypted result
+    // Exceptions:
+    //   - Throws an IllegalArgumentException if the input is null
+    //   - Input string should be non-null and all chars should be within the encodable range
     @Override
     public String encrypt(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null!");
+        }
         String result = input;
         for (Cipher cipher : ciphers) {
             result = cipher.encrypt(result);
@@ -40,8 +46,14 @@ public class MultiCipher extends Cipher {
     //   - input: String representing the input to be decrypted
     // Returns:
     //   - String representing the decrypted result
+    // Exceptions:
+    //   - Throws an IllegalArgumentException if the input is null
+    //   - Input string should be non-null and all chars should be within the encodable range
     @Override
     public String decrypt(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Input cannot be null!");
+        }
         String result = input;
         for (int i = ciphers.size() - 1; i >= 0; i--) {
             result = ciphers.get(i).decrypt(result);
